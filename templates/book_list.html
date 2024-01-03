@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Add this link in the head section of your base.html -->
+<style>
+    /* Custom styles for your website */
+.card {
+    border: 2px solid #17a2b8;
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-footer {
+    border-top: 1px solid #17a2b8;
+}
+
+/* Add more custom styles as needed */
+
+</style>
+<div class="row">
+    {% for book in books %}
+        <div class="col-md-4 mb-4" style="padding:  10px;">
+            <div class="card h-100">
+                <a href="{% url 'book_detail' book.id %}">
+                    <img src="{{ book.picture.url }}" class="card-img-top" alt="{{ book.title }}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.description }}</p>
+                </div>
+                <div class="card-footer bg-light">
+                    <a href="{% url 'book_detail' book.id %}" class="btn btn-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
